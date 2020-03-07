@@ -11,4 +11,11 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public static User createUser() {
+        User user = new User();
+        user.setName("小明");
+        user.setId(1L);
+        return user;
+    }
 }
