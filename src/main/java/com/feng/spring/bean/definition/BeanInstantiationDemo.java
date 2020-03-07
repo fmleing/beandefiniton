@@ -13,7 +13,9 @@ public class BeanInstantiationDemo {
         // 启动 Spring 应用上下文
         BeanFactory beanFactory = new ClassPathXmlApplicationContext("classpath:/META-INF/bean-creation-context.xml");
 
-        User user = beanFactory.getBean("user-by-static-method", User.class);
-        System.out.println(user);
+        User userByStaticMethod = beanFactory.getBean("user-by-static-method", User.class);
+        User userByInstanceMethod = beanFactory.getBean("user-by-instance-method", User.class);
+        System.out.println(userByStaticMethod);
+        System.out.println(userByInstanceMethod);
     }
 }
