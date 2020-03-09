@@ -18,8 +18,16 @@ public class SpecialBeanInstantiationDemo {
         // 启动 Spring 应用上下文
         BeanFactory beanFactory = new ClassPathXmlApplicationContext("classpath:/META-INF/special-bean-instantiation-context.xml");
 
-        demoServiceLoader();
+        //demoServiceLoader();
 
+        ServiceLoader<UserFactory> serviceLoader = beanFactory.getBean("userFactoryServiceLoader", ServiceLoader.class);
+
+        // 使用迭代器 进行迭代
+        Iterator<UserFactory> iterator = serviceLoader.iterator();
+        while (iterator.hasNext()) {
+            UserFactory userFactory = iterator.next();
+            System.out.println(userFactory.createUser());
+        }
     }
 
     public static void demoServiceLoader(){
