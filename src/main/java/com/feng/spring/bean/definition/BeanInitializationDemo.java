@@ -5,6 +5,7 @@ import com.feng.spring.bean.factory.UserFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 /**
  * Bran 初始化 示例
@@ -19,13 +20,15 @@ public class BeanInitializationDemo {
         applicationContext.register(BeanInitializationDemo.class);
         // 启动 applicationContext
         applicationContext.refresh();
-
+        // 非延迟初始化在 Spring 应用上下文启动完成后，被初始化
+        System.out.println("Spring 应用上下文已启动...");
         UserFactory userFactory = applicationContext.getBean(UserFactory.class);
         // 关闭 applicationContext
         applicationContext.close();
     }
 
     @Bean(initMethod = "initMethod")
+    @Lazy
     public UserFactory initUserFactory(){
         return new DefaultUserFacoty();
     }
