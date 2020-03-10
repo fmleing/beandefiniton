@@ -10,4 +10,5 @@ public interface UserFactory {
         return new User();
     }
 
+    void initMethod();
 }

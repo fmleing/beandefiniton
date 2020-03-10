@@ -12,4 +12,9 @@ public class DefaultUserFacoty implements  UserFactory {
     public void init(){
         System.out.println(" @PostConstruct 初始化。。。 ");
     }
+
+    // 3.2 基于 @Bean initMethod 方法
+    public void initMethod(){
+        System.out.println(" @Bean$initMethod 初始化...");
+    }
 }

@@ -25,7 +25,7 @@ public class BeanInitializationDemo {
         applicationContext.close();
     }
 
-    @Bean
+    @Bean(initMethod = "initMethod")
     public UserFactory initUserFactory(){
         return new DefaultUserFacoty();
     }
