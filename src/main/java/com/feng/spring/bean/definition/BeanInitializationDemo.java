@@ -23,8 +23,10 @@ public class BeanInitializationDemo {
         // 非延迟初始化在 Spring 应用上下文启动完成后，被初始化
         System.out.println("Spring 应用上下文已启动...");
         UserFactory userFactory = applicationContext.getBean(UserFactory.class);
+        System.out.println("Spring 应用准备关闭...");
         // 关闭 applicationContext
         applicationContext.close();
+        System.out.println("Spring 应用已关闭...");
     }
 
     @Bean(initMethod = "initMethod",destroyMethod = "destoryMethod")
