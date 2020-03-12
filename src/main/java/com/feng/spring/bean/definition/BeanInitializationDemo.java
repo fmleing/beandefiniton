@@ -27,8 +27,7 @@ public class BeanInitializationDemo {
         applicationContext.close();
     }
 
-    @Bean(initMethod = "initMethod")
-    @Lazy
+    @Bean(initMethod = "initMethod",destroyMethod = "destoryMethod")
     public UserFactory initUserFactory(){
         return new DefaultUserFacoty();
     }
