@@ -3,6 +3,7 @@ package com.feng.spring.bean.definition;
 import com.feng.spring.bean.pojo.User;
 import com.feng.spring.dependency.lookup.ObjectProviderDemo;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -26,8 +27,20 @@ public class TypeSafetyDependencyLookupDemo {
         displayObjectFactoryGetObject(applicationContext);
         // 演示 ObjectProvider#getIfAvailable()方法的安全性
         displayObjectProviderGetIfAvailable(applicationContext);
+
+        // 演示 ListableBeanFactory#getBeansOfType()方法的安全性
+        displayListableBeanFactoryGetBeansOfType(applicationContext);
         // 关闭 容器
         applicationContext.close();
+    }
+
+    private static void displayListableBeanFactoryGetBeansOfType(AnnotationConfigApplicationContext applicationContext) {
+        ObjectProvider<User> userObjectProvider = applicationContext.getBeanProvider(User.class);
+        printBeansException(()->userObjectProvider.stream().forEach(System.out::println));
+    }
+
+    private static void displayListableBeanFactoryGetBeansOfType(ListableBeanFactory beanFactory) {
+        printBeansException(()->beanFactory.getBeansOfType(User.class));
     }
 
     private static void displayObjectProviderGetIfAvailable(AnnotationConfigApplicationContext applicationContext) {
