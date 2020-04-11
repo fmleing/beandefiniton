@@ -22,15 +22,22 @@ public class TypeSafetyDependencyLookupDemo {
 
         // 演示 BeanFactory#getBean()方法的安全性
         displayBeanFactoryGetBean(applicationContext);
-
-        displayObjectFactoryGetBean(applicationContext);
+        // 演示 ObjectFactory#getObject()方法的安全性
+        displayObjectFactoryGetObject(applicationContext);
+        // 演示 ObjectProvider#getIfAvailable()方法的安全性
+        displayObjectProviderGetIfAvailable(applicationContext);
         // 关闭 容器
         applicationContext.close();
     }
 
-    private static void displayObjectFactoryGetBean(AnnotationConfigApplicationContext applicationContext) {
-        ObjectFactory<User> objectProvider = applicationContext.getBeanProvider(User.class);
-        printBeansException(()->objectProvider.getObject());
+    private static void displayObjectProviderGetIfAvailable(AnnotationConfigApplicationContext applicationContext) {
+        ObjectProvider<User> objectProvider = applicationContext.getBeanProvider(User.class);
+        printBeansException(()->objectProvider.getIfAvailable());
+    }
+
+    private static void displayObjectFactoryGetObject(AnnotationConfigApplicationContext applicationContext) {
+        ObjectFactory<User> objectFactory = applicationContext.getBeanProvider(User.class);
+        printBeansException(()->objectFactory.getObject());
     }
 
     private static void displayBeanFactoryGetBean(AnnotationConfigApplicationContext applicationContext) {
