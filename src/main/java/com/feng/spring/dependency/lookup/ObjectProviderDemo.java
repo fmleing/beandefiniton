@@ -1,5 +1,6 @@
 package com.feng.spring.dependency.lookup;
 
+import com.feng.spring.bean.pojo.User;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -20,10 +21,15 @@ public class ObjectProviderDemo {
         applicationContext.refresh();
 
         // 依赖查找
-        lookupByObjectProvider(applicationContext);
+        lookupIfAvaiable(applicationContext);
 
         // 关闭 容器
         applicationContext.close();
+    }
+
+    public static void lookupIfAvaiable(AnnotationConfigApplicationContext applicationContext){
+        ObjectProvider<User> userObjectProvider = applicationContext.getBeanProvider(User.class);
+        User u = userObjectProvider.getIfAvailable(() -> User.createUser());
     }
 
     @Bean
