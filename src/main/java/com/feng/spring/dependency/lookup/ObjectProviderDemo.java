@@ -4,6 +4,7 @@ import com.feng.spring.bean.pojo.User;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 
 /**
  * 通过 {@link ObjectProvider} 进行依赖查找
@@ -32,9 +33,20 @@ public class ObjectProviderDemo {
         User u = userObjectProvider.getIfAvailable(() -> User.createUser());
     }
 
+    public static void lookupByStreamOps(AnnotationConfigApplicationContext applicationContext){
+        ObjectProvider<String> objectProvider = applicationContext.getBeanProvider(String.class);
+        objectProvider.stream().forEach(System.out::println);
+    }
+
     @Bean
+    @Primary
     public String helloWorld(){
         return "Hello World";
+    }
+
+    @Bean
+    public String message(){
+        return "Message";
     }
 
     private static void lookupByObjectProvider(AnnotationConfigApplicationContext applicationContext) {
