@@ -3,6 +3,8 @@ package com.feng.spring.bean.definition;
 import com.feng.spring.bean.factory.UserFactory;
 import com.feng.spring.bean.pojo.User;
 import org.springframework.beans.MutablePropertyValues;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.HierarchicalBeanFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -30,5 +32,15 @@ public class HierarchicalDependencyDemo {
         // 关闭 applicationContext
         applicationContext.close();
 
+    }
+
+    private static boolean containsBean(HierarchicalBeanFactory beanFactory,String beanName){
+        BeanFactory parentBeanFactory = beanFactory.getParentBeanFactory();
+        if(parentBeanFactory instanceof HierarchicalBeanFactory){
+            HierarchicalBeanFactory parentHierarchicalBeanFactory = HierarchicalBeanFactory.class.cast
+                    (parentBeanFactory);
+            return containsBean(parentHierarchicalBeanFactory, beanName);
+        }
+        return beanFactory.containsLocalBean(beanName);
     }
 }
