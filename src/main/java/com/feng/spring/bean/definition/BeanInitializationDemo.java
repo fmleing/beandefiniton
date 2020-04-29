@@ -27,6 +27,9 @@ public class BeanInitializationDemo {
         // 关闭 applicationContext
         applicationContext.close();
         System.out.println("Spring 应用已关闭...");
+
+
+        System.out.println(")");
     }
 
     @Bean(initMethod = "initMethod",destroyMethod = "destoryMethod")
