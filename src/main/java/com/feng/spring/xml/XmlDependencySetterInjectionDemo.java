@@ -13,7 +13,7 @@ public class XmlDependencySetterInjectionDemo {
 
         XmlBeanDefinitionReader xmlReader = new XmlBeanDefinitionReader(beanFactory);
 
-        String xmlResourcePath = "";
+        String xmlResourcePath = "classpath:META-INF/bean-setter-inject.xml";
         xmlReader.loadBeanDefinitions(xmlResourcePath);
     }
 }
