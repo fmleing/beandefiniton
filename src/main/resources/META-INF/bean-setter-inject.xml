@@ -3,14 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<!-- 静态方法实例化 Bean-->
-<bean id="user-by-static-method" class="com.feng.spring.bean.pojo.User"
-      factory-method="createUser"/>
-
-<!-- FactoryBean 实例化 Bean-->
-<!-- 这种实现方式比较特殊，这里并不是直接去定义一个User Bean ，而是定义一个 FactoryBean 去链接 User 对应的 实现方法和实现类型 -->
-<bean id="user-by-factory-bean" class="com.feng.spring.bean.factory.UserFactoryBean"/>
-<!-- 工厂方法实例化 Bean-->
-<bean id="user-by-instance-method" factory-bean="userFacoty" factory-method="createUser"/>
-<bean id="userFacoty" class="com.feng.spring.bean.factory.DefaultUserFacoty"/>
+    <bean class="com.feng.spring.xml.UserHolder">
+        <property name="user" ref="user"/>
+    </bean>
 </beans>

@@ -14,6 +14,9 @@ public class XmlDependencySetterInjectionDemo {
         XmlBeanDefinitionReader xmlReader = new XmlBeanDefinitionReader(beanFactory);
 
         String xmlResourcePath = "classpath:META-INF/bean-setter-inject.xml";
+        // 加载 xml 资源，并生成 BeanDefinition 资源
         xmlReader.loadBeanDefinitions(xmlResourcePath);
+        UserHolder userHolder = beanFactory.getBean(UserHolder.class);
+        userHolder.toString();
     }
 }
